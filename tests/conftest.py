@@ -6,6 +6,7 @@ from __future__ import annotations
 import asyncio
 import itertools
 import json
+import os
 import re
 import time
 from typing import Optional
@@ -14,8 +15,12 @@ import httpx
 import pytest
 from fastapi.testclient import TestClient
 
-from app.core import config
-from app.main import create_app
+# must be set before app.core.config is imported; the mock transport
+# intercepts every request, so the host itself never resolves
+os.environ.setdefault("HOSPITAL_API_BASE_URL", "http://hospital-directory.test")
+
+from app.core import config  # noqa: E402
+from app.main import create_app  # noqa: E402
 
 ACTIVATE_RE = re.compile(r"^/hospitals/batch/([0-9a-f-]+)/activate$")
 

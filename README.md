@@ -13,7 +13,9 @@ batches can be resumed.
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-pytest                        # test suite (46 tests)
+pytest                        # test suite (47 tests)
+
+export HOSPITAL_API_BASE_URL=https://hospital-directory.onrender.com
 uvicorn app.main:app          # API at http://localhost:8000/docs
 ```
 
@@ -100,7 +102,7 @@ would have — swapping in Postgres/Redis later touches one file.
 
 | Variable | Default | Meaning |
 |---|---|---|
-| `HOSPITAL_API_BASE_URL` | `https://hospital-directory.onrender.com` | Upstream base URL |
+| `HOSPITAL_API_BASE_URL` | **required, no default** | Upstream base URL (e.g. `https://hospital-directory.onrender.com`); startup fails fast when unset |
 | `MAX_CONCURRENT_UPSTREAM_CALLS` | `5` | Global in-flight call cap |
 | `MAX_RETRIES` | `3` | Retries per upstream call |
 | `UPSTREAM_TIMEOUT_SECONDS` | `30` | Per-request timeout (Render cold starts) |
