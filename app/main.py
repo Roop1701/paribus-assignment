@@ -27,6 +27,11 @@ from app.module.bulk_engine import BulkEngine
 def create_app(upstream_transport: Optional[httpx.AsyncBaseTransport] = None) -> FastAPI:
     @asynccontextmanager
     async def lifespan(app: FastAPI):
+        if not config.HOSPITAL_API_BASE_URL:
+            raise RuntimeError(
+                "HOSPITAL_API_BASE_URL is not set. Export it before starting, "
+                "e.g. HOSPITAL_API_BASE_URL=https://hospital-directory.onrender.com"
+            )
         client = httpx.AsyncClient(
             base_url=config.HOSPITAL_API_BASE_URL,
             timeout=config.UPSTREAM_TIMEOUT_SECONDS,

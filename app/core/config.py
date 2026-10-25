@@ -12,9 +12,9 @@ APP_VERSION = "1.0.0"
 API_PREFIX = "/hospitals/bulk"
 
 # --- Upstream Hospital Directory API ---
-HOSPITAL_API_BASE_URL = os.getenv(
-    "HOSPITAL_API_BASE_URL", "https://hospital-directory.onrender.com"
-)
+# Required; supplied via the environment only — no URL hardcoded in code.
+# Startup fails fast with a clear error when unset (checked in app.main).
+HOSPITAL_API_BASE_URL = os.getenv("HOSPITAL_API_BASE_URL", "")
 # Render free tier can cold-start slowly; generous per-request timeout.
 UPSTREAM_TIMEOUT_SECONDS = float(os.getenv("UPSTREAM_TIMEOUT_SECONDS", "30"))
 

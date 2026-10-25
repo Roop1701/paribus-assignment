@@ -23,6 +23,19 @@ def test_health(client):
     assert "version" in body["data"]
 
 
+def test_startup_fails_fast_without_upstream_url(monkeypatch):
+    import pytest
+    from fastapi.testclient import TestClient
+
+    from app.core import config
+    from app.main import create_app
+
+    monkeypatch.setattr(config, "HOSPITAL_API_BASE_URL", "")
+    with pytest.raises(RuntimeError, match="HOSPITAL_API_BASE_URL is not set"):
+        with TestClient(create_app()):
+            pass
+
+
 def test_bulk_upload_returns_202_envelope(client):
     response = upload(client, CSV_THREE)
     assert response.status_code == 202
