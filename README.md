@@ -5,8 +5,24 @@ hospitals and processes them against the deployed
 [Hospital Directory API](https://hospital-directory.onrender.com/docs): each
 row is created under one batch ID (inactive), then the whole batch is
 activated in a single call once every row succeeded. Processing runs in the
-background; progress is available by polling and by SSE streaming, and failed
-batches can be resumed.
+background; progress is available by polling and by SSE streaming, and
+batches can be paused and resumed.
+
+## Live Deployment
+
+| | |
+|---|---|
+| **Base URL** | https://paribus-assignment-xp3l.onrender.com |
+| **Swagger UI** | https://paribus-assignment-xp3l.onrender.com/docs |
+| **ReDoc** | https://paribus-assignment-xp3l.onrender.com/redoc |
+| **Health** | https://paribus-assignment-xp3l.onrender.com/health |
+
+> Hosted on Render's free tier: the first request after a quiet period
+> cold-starts in ~30–60s; subsequent requests are fast.
+
+**Full technical documentation — architecture, API reference, design
+rationale, state machine, testing strategy: see
+[DOCUMENTATION.md](DOCUMENTATION.md).**
 
 ## Quickstart (Python 3.9+)
 
